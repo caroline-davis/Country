@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './App.css';
 import CountryInput from './CountryInput'
+import Info from './Info'
 
 function App() {
 
@@ -8,9 +9,6 @@ function App() {
   const [searchResult, setSearchResult] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
-
-  console.log('hi', searchResult ? searchResult : "")
-
 
   return (
     <div className="App">
@@ -23,6 +21,14 @@ function App() {
         setLoading={setLoading}
         setError={setError}
       />
+      <div>
+        {loading && !error &&
+          `Loading...`}
+        {!loading && error &&
+          `Something went wrong, please try again`}
+        {searchResult && !loading && !error &&
+          <Info searchResult={searchResult} />}
+      </div>
     </div>
   );
 }
